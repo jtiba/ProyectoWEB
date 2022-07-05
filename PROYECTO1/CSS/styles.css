@@ -1,0 +1,665 @@
+/* Fuentes */
+
+@font-face {
+    font-family: "Avenir";
+    src: url('../fonts/Avenir-Book.ttf')
+}
+
+/* Reseteo */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none; /*Para que no subraye los enlaces */
+    cursor: pointer;
+    color: inherit; /* Heredado para quitar el color que trae los navegadores por deafaul */
+}
+
+/* Generales */
+
+html {
+    font-size: 20px; /* Subimos un poco de tamaño la fuente que trae los navegadores por defecto */    
+}
+
+@media (max-width: 440px) { /* y lo mismo de arriba con una media query un maxino de 4440px */
+    html {
+        font-size: 18px; /* se hace esto porque tenemos muchos elementos referenciados con 
+                            rem y como tenemos un cambio para moviles con lo de arriba desde generales
+                            hara que sean mas pequeños y esto hara que nuestro diseño sea responsive 
+                            en los dispositivos menores de 440px */
+    }
+}
+
+body {
+    font-family:"Avenir", sans-serif ; /* Cargamos la funte y sans-serif por si nuestra fuente no carga.. por seguirdad */
+    color: #67666e;
+}
+
+img {
+    max-width: 100%; /* ponemos todas las imagenes responsive y asi no se escapan de los elementos que los contengan */
+}
+
+p {
+    margin-bottom: 0.8rem;/* margen bottom le ponemos espacio a todos los  parrafos para que se vea mejo */
+}
+/* Hero */
+
+.hero {
+    width: 100%;/* Para que la imagen ocupe el 100% de la pantalla */
+    height: 100vh;
+    background-color: black; /* Color fondo atras de la imagen */
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden; /* Los elemento que esten no se desborden poque utilizamos un esacaldo */
+}
+
+@keyframes heroAnimation { /* Vamos animar el hero y lo llamamos heroAnimation le pusimo ese nombre */
+    0%  {
+        opacity: 0; /* cuando este al 0% Osea que nazca oculto */
+        animation-timing-function: ease-in; /* Este haciendo las transiciones con esa curva de aceleración */
+    }
+
+    12% {opacity: 1;} /* Acá le estamos diciendo que cuando este al 12% se vea la imagen */
+    25% {transform: scale(1.2);}/* Introducimos esta no vedad de transform para escalar la imagen a 1.2 para que la haga mas grande un 20% */
+    
+    75% {
+        opacity: 0; /* Para que se valla desvaneciendo la imagen */
+        transform: scale(1.1); /* Para que valla encogiendo y veamos el movimento */
+    }
+    
+    100% {opacity: 0;}
+}
+    
+
+
+.hero div {
+    width: 100%;/* Para que la imagen ocupe el 100% de la pantalla */
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-size: cover ;/* Propiedades de fondo de imagen no de la imagen y le ponemos cover para que ocupe todo el tamaño disponible */
+    background-position: center; /* Para centrar imagen */
+    background-repeat: none; /* Para que no se repita */
+    opacity: 0; /* Ocuparan espacio pero no se veran */
+    animation: heroAnimation 18s infinite /* Implementadi la animación en los div con tiempo de 18 segundos e infinite para que se repita de manera continua*/
+}
+
+.hero div:nth-child(1) { /* Estamos poniendo las imagenes en cada div */
+    background-image: url('../img/front1.jpg');
+}
+
+.hero div:nth-child(2) { /* Estamos poniendo las imagenes */
+    background-image: url('../img/front2.jpg');
+    animation-delay: 6s; /* se pone un atrazo en el inicio de la animacion para que se vea el efecto*/
+}
+
+.hero div:nth-child(3) { /* Estamos poniendo las imagenes */
+    background-image: url('../img/front3.jpg');
+    animation-delay: 12s;
+}
+
+.hero .hero-logo {
+    position: absolute;
+    top: 50%; /* Otra metodo para centrar con top, left, transform */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: none; /* Para que no tenga la animación */
+    opacity: 1;/* Rmper los opacity que tienen los div */
+    width: 30%; /* Vamos a tener el logo a un 30% del ancho del dispositivo con height auto */ 
+    height: auto;
+}
+
+.hero .hero-down { 
+    position: absolute;
+    top: 90%; /* 90 para que se valla a la parte inferior */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: none; /* Para que no tenga la animación */
+    opacity: 1;/* Rmper los opacity que tienen los div */
+    width: 5%; /* Vamos a tener el logo a un 30% del ancho del dispositivo con height auto */ 
+    height: auto;
+}
+
+@media (max-width: 720px) { /* ajustando tamaños para la fecha y el logo para que se vea mejor */
+    .hero .hero-logo {
+        width: 60%;
+    }
+    .hero .hero-down {
+        width: 15%;
+    }
+}
+
+@media (max-width: 440px) { /* ajustando tamaños para la fecha y el logo para que se vea mejor */
+    .hero .hero-logo {
+        width: 80%;
+    }
+    .hero .hero-down {
+        width: 20%;
+    }
+}
+
+/* Header */
+
+header {
+    background-color: white;
+    box-shadow: 1.5px 1.5px 4px #b3b3b3; /* Para darle Sombra 4px es para difuminar*/
+    height: 80px;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;/* le ponemos esto para bajar la cabecera y ya podemos visualizar nuestro logo y menu */
+    display: flex; /* Poner en línes lo que tengamos*/
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1em;
+    transition: 600ms all ease-in-out;
+}
+
+header.transparente{ /* se hizo para que donde esta nuestro logo y menu no se vea blanco si no que sea transparente y se vea dentro de la imagen */
+    background-color: transparent;
+    box-shadow: none;
+}
+header img {
+    height: 60px; /* ancho */
+    width: auto;
+}
+
+header nav a {
+    color: #67666e;
+    font-weight: normal;
+    margin-left: 1em;
+    transition: 300ms ease-in-out all;
+}
+header.transparente nav a {
+    color: rgba(255, 255, 255, 0.9);
+    
+}
+header nav a.activo,
+header nav a:hover {
+    color: #a97c50;
+    font-weight: bold;
+}
+header.transparente nav a.activo,
+header.transparente nav a:hover {
+    color: white;
+}   
+
+/*Boton burguer*/
+
+#burguer {
+    position: fixed;
+    top: 1rem;
+    left: 1rem;
+    cursor: pointer;
+    z-index: 10;/* z-index para que nuestro boton hambuerguesa sobresalga y lo podamos ver*/
+    display: none;/* desaparece la hambiugues o sea las lineas del menu */
+}
+
+#burguer .barra {
+    width: 30px;
+    height: 2px;
+    margin: 6px;
+    background-color: #a97c50;
+    transition: 400ms all ease-in-out
+}
+
+#burguer.abierto .barra {
+    background-color: white;
+}
+
+#burguer.abierto .barra.superior {
+    transform: translateY(8px) rotateZ(45deg);/* Trasformamos la barra que se rote*/
+}
+
+#burguer.abierto .barra.media {
+    width: 0;/* hacemos desaparecer la barra media*/
+}
+
+#burguer.abierto .barra.inferior {
+    transform: translateY(-8px) rotateZ(-45deg);/* lo contrario que barra superior para que se cruce por eso el signo y sew convierta en una X -*/
+}
+
+@media (max-width: 620px) { /* lo que hacemos con esta media query y header nav es que nuestro boton de habuerguesa(osea las líneas) desaparescan para una medida 620px.*/
+    #burguer { 
+        display: block;
+    }
+
+    header {
+        justify-content: flex-end; /* Hacemos que nuestro logo cuando esa por debajo de 620px se pase al lado derecho y no salgan los dos al timpo boton hamburguesa y logo */
+    }
+
+    header nav {
+        display: none;
+    }
+}
+
+/* Menú Lateral*/
+
+.menu {
+    width: 360px;
+    height: 100vh;
+    background-color: #424242;
+    position: fixed;
+    top: 0;
+    left: -360px;/*ocultamos el menu por eso le ponemos -360 que es igual a l ancho */
+    padding-top: 40px; /* se le da espacio arriba de 80 PX*/
+    transition: all 700ms ease-in-out;
+
+}
+
+.menu.abierto { /* aca vuelve aparecer el menu*/
+    left: 0;
+}
+
+.menu nav {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu nav a {
+    padding: 0.6rem 0;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 1,1rem;
+    transition: 300ms all ease-in-out;
+}
+
+.menu nav a:hover {
+    color: white;
+}
+.menu .copyright {
+    color:rgba(255, 255, 255, 0.75);
+    font-size: 0.9rem;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0.5rem;
+    text-align: center;
+    width: 100%;
+    
+}
+
+/* Layout */
+
+.primera { /* para poder ver contenido debajo de la imegen hero*/
+    margin-top: 100vh;
+}
+
+#pr,
+#legal,
+#cookies {
+    display: block;
+    margin-top: -90px;/* suba hacia aariba y paddin de 80 para bajar el matgin*/
+    padding-bottom: 90px;
+}
+
+.fila {
+    display: flex;
+    padding: 2rem 1rem;/* Espaciado a los elementos */
+}
+
+.fila.contacto {
+    margin-top: 80px;
+}
+
+.col-100 {
+    width: 100%;
+    padding: 0.5rem 1rem;
+} 
+
+.col-75 {
+    width: 75%;
+    padding: 0.5rem 1rem;
+}    
+.col-66 {
+    width: 66.66666%;
+    padding: 0.5rem 1rem;/* 0.5rem arriba y abajo y 1rem derecha e izquierda */
+}    
+.col-50 {
+    width: 50%;
+    padding: 0.5rem 1rem;/* 0.5rem arriba y abajo y 1rem derecha e izquierda */
+}
+
+.col-33 {
+    width: 33.33333%;
+    padding: 0.5rem 1rem;/* 0.5rem arriba y abajo y 1rem derecha e izquierda */
+}
+
+.col-25 {
+    width: 25%;
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 720px) {
+    .fila {
+        flex-direction: column; /* pasamos la fila a columna cuando sea por debajo de 720px y el elemeno que se tenga ahi para este ejemplo la imagen de la casa para a colimna abajo */
+        padding: 1rem 0.5rem;
+    }
+
+    .col-75,
+    .col-66,
+    .col-50,
+    .col-33,
+    .col-25 {
+        width: 100%;
+        
+    }    
+}
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-around {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.flex-column-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Espaciados y márgenes */
+
+.m-t {
+    margin-top: 1rem;
+}
+.m-b {
+    margin-bottom: 1rem;
+}
+.m-l {
+    margin-left: 1rem;
+}
+.m-r {
+    margin-right: 1rem;
+}
+
+.m-t-small {/* esta clases small son las que vamos a utilizar en nuestro proyecto para espaciar los iconos del texto */
+    margin-top: 0.5rem;
+}
+.m-b-small {
+    margin-bottom: 0.5rem;
+}
+.m-l-small {
+    margin-left: 0.5rem;
+}
+.m-r-small {
+    margin-right: 0.5rem;
+}
+
+/* Parallax */
+
+.fila.parallax {
+    background-image: url('../img/property5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;/* Conseguimos efecto que la imagen se quede quieta */
+    padding: 3rem 2rem ;
+}
+
+.fila.parallax div {
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 2rem;
+}
+
+.fila.parallax div p {
+    font-size: 1.5rem;
+    color: #a97c50;
+    text-align: center;
+}
+
+/* Caja Navegación */
+
+.caja-nav img {
+    width: 20%;
+    margin-bottom: 1em;
+}
+
+.caja-nav a {
+    border: 1px solid #a97c50;
+    background-color: white;
+    color: #a97c50;
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: all ease-in-out 400ms;
+
+}
+
+.caja-nav a:hover {
+    background-color: #a97c50;
+    color: white;
+}
+
+/* Formulario contacto */
+
+form.contacto { /* Ponemos mas pequeño el espacio de contacto */
+    width: 50%;
+}
+
+@media (max-width: 720px){/* ponemos esta media query para poder visualizarlo bien el contacto en una tablet*/
+    form.contacto{
+        width: 75%;
+    }
+}
+
+@media (max-width: 440px){/* ponemos esta media query para poder visualizarlo bien el contacto en un celular*/
+    form.contacto{
+        width: 100%;
+    }
+}
+form.contacto .fila {/* disminuimos el espacio DE Ccontacto*/
+    padding: 0.8rem;
+
+}
+
+input {
+    border: none;
+    border-bottom: 1.5px solid #a97c50;
+    font-size: 1rem;
+    padding: 0.5em 1em;
+    width: 100%;
+}
+
+input:focus {/* cuando uno le pone el mouse se cierra el cuadrado en nombre ya pellido eso es focus en este momento lo hace ya veremps cuando se haga mas stylo si se sigue aplicando */
+    outline: none; /* Aca ya le quitamos los bordes o sea lo que se encerrasba arriba ya no aparece */
+    border-bottom: 1.5px solid #643e18;/* la línes de abajo se pone de un color mas oscuro cuando cilkeamos ahi */
+}
+
+input.usuario {
+    background-image: url('../img/user.svg');
+    background-repeat: no-repeat;
+    background-position: 0 7px;
+    padding-left: 2em;
+}
+
+input.email {
+    background-image: url('../img/mail-bronce.svg');
+    background-repeat: no-repeat;
+    background-position: 0 7px;
+    padding-left: 2em;
+}
+
+button {
+    border: none;
+    background-color:  #a97c50;
+    color: white;
+    font-size: 1rem;
+    font-weight: normal;
+    padding: 0.5em 1em;
+    border-radius: 0.3em;
+    cursor: pointer;
+    transition: all ease-in-out 400ms;
+
+}
+
+button:hover {
+    background-color: #81501e;
+}
+
+input[type="checkbox"] {
+    display: none;
+
+}
+
+input[type="checkbox"] + label::before { /* es el icono de un cuadrado antes de acepto condiciones legales*/
+    content: url('../img/square.svg');
+    position: relative;
+    top: 5px;
+    padding-right: 5px ;
+    
+}
+
+input[type="checkbox"]:checked + label::before {/* aca lo que hacesmos es que nos pones un visto bueno */
+    content: url('../img/check-square.svg');
+    
+}
+
+/* Footer es la historia de la pagina */
+
+footer {
+    background-color: #424242;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+footer p:first-child {/* first-child con esto hacemos que el preimero de los parrafos se de un color diferente */
+    color: #a97c50; /* le ponemos el color corporativo */
+    font-weight: bold; /* Le ponemos en negrita como resaltado*/
+
+}
+
+footer img.rrss {
+    height: 48px;
+}
+
+footer a {
+    font-size: 0.8rem;
+    color: #a97c50;
+    transition: 400ms ease-in-out all;
+}
+
+footer a:hover {
+    color: #704a24;
+}
+
+footer .copyright {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.8rem;
+    text-align: center;
+}
+
+/* Card - tarjeta de ventas*/
+
+.fila.grid { /* nos sirve para poderponer las tarjetas que queramos y se ajusten */
+    margin-top: 100px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit,360px);/* Permite repetir elementos como columnas por igual se le pasa un elemento auto-fit quiere decir que cada elemento se adapta al espacio disponible y se le pasa un valor de referencia como ya tenemos nuestras tarjetas de 360 px se le pasa esa mmedida*/
+    grid-gap: 1.5rem;/* para ponerle espacio entre cada tarjeta con este es mas facil por que el navegador lo calcula*/
+    justify-content: center;
+}
+.card {
+    width: 360px; /* Con 360px nos sirve para no ser adatavado a moviles queda biern */
+    border-radius: 0.5rem;
+    box-shadow: 2px 2px 4px gray;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;/*como la tarjeta tiene una imagen le pasamos overflow para que la imagen se centre y qyuede integrada */
+}
+
+.card img {
+    height: 320px;
+}
+
+.card .footer-card {
+    padding: 0.8rem;
+    width: 100%;/* 100% del padre ya que padre tiene flex se ha hecho mas peuqeño */
+    height: 174px;
+    display: flex;/* esto para los datos que tenga adentro*/
+    flex-direction: column;
+    justify-content: space-between;/* Esta parte para que los textos se vallan arriba y abajo*/
+    align-items: flex-start;/*esta parate como son textos esten aliniados en el eje de la Y en la parte de la izquierda */
+}
+
+.card .footer-card p {
+    margin-bottom: 0.5rem;
+}
+
+.card .footer-card p:first-child {
+    font-weight: bold ;
+}
+
+.card .footer-card a { /* enlace de pagina ventas información */
+    background-color: #a97c50;
+    color: white;
+    font-size: 0.8rem;
+    border-radius: 0.3em;
+    padding: 0.5em 1em;
+    align-self: center;/* centramos solo este elemento con este codigo ya que en footer card estan alineados todos los lementos con flex-start*/
+    transition: 400ms ease-in-out all;
+}
+
+.card .footer-card a:hover { /* enlace de pagina ventas información */
+    background-color: #664626;
+  }
+
+/* Ficha Propiedad en pagina propiedad */
+
+.propiedad {
+    margin-top: 80px;
+    background-image: url('../img/property5.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.propiedad div:first-child {
+    background-color: rgba(255, 255, 255, 0.90);   
+}
+
+.propiedad div:first-child h1 {
+    font-size: 1.4rem;  
+    color: #a97c50; 
+}
+
+.propiedad div:first-child p img {
+    width: 28px;
+    height: 28px;
+
+}
